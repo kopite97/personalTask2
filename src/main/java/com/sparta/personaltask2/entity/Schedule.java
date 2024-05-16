@@ -16,7 +16,7 @@ import java.sql.Timestamp;
 public class Schedule extends Timestamped {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "title", nullable = false)
     private String title;
