@@ -2,6 +2,7 @@ package com.sparta.personaltask2.controller;
 
 import com.sparta.personaltask2.dto.RequestScheduleDto;
 import com.sparta.personaltask2.dto.ResponseScheduleDto;
+import com.sparta.personaltask2.entity.Schedule;
 import com.sparta.personaltask2.service.ScheduleService;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,11 +32,12 @@ public class ScheduleController {
 
     @DeleteMapping("/schedules/{id}")
     public Long deleteSchedule(@PathVariable Long id) {
-        return null;
+
+        return scheduleService.deleteSchedule(id);
     }
 
     @PutMapping("/schedules/{id}")
     public Long updateSchedule(@PathVariable Long id, @RequestBody RequestScheduleDto requestScheduleDto) {
-        return null;
+        return scheduleService.updateSchedule(id, requestScheduleDto);
     }
 }

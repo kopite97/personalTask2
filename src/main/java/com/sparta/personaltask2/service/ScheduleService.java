@@ -33,4 +33,23 @@ public class ScheduleService {
     public List<ResponseScheduleDto> getSchedules() {
         return scheduleRepository.findAll().stream().map(ResponseScheduleDto::new).toList();
     }
+
+    public Long deleteSchedule(Long id) {
+        Schedule schedule = findSchedule(id);
+        scheduleRepository.delete(schedule);
+        return id;
+    }
+
+    @Transactional
+    public Long updateSchedule(Long id, RequestScheduleDto requestScheduleDto) {
+        Schedule schedule = findSchedule(id);
+        schedule.update(requestScheduleDto);
+
+        return id;
+    }
+    private Schedule findSchedule(Long id) {
+        return scheduleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("선택한 일정은 존재하지 않습니다."));
+    }
+
+
 }
