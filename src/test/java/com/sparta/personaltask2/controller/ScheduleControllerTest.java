@@ -32,9 +32,9 @@ class ScheduleControllerTest {
     void test1(){
 
         RequestScheduleDto requestDto = new RequestScheduleDto();
-        requestDto.setTitle("Test Title");
-        requestDto.setContent("Test Content");
-        requestDto.setWorker("Test Worker");
+//        requestDto.setTitle("Test Title");
+//        requestDto.setContent("Test Content");
+//        requestDto.setWorker("Test Worker");
 
         // when
         Schedule savedSchedule = scheduleRepository.save(new Schedule(requestDto));

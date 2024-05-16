@@ -30,10 +30,10 @@ public class ScheduleController {
         return scheduleService.createSchedule(requestScheduleDto);
     }
 
-    @DeleteMapping("/schedules/{id}")
-    public Long deleteSchedule(@PathVariable Long id) {
+    @DeleteMapping("/schedules")
+    public Long deleteSchedule(@RequestParam Long id, @RequestParam String password) {
 
-        return scheduleService.deleteSchedule(id);
+        return scheduleService.deleteSchedule(id,password);
     }
 
     @PutMapping("/schedules/{id}")

@@ -31,7 +31,7 @@ public class Schedule extends Timestamped {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.worker = requestDto.getWorker();
-        this.password ="1234";
+        this.password =requestDto.getPassword();
     }
 
 
