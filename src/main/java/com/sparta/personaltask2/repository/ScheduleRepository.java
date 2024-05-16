@@ -1,4 +1,7 @@
 package com.sparta.personaltask2.repository;
 
-public class ScheduleRepository {
+import com.sparta.personaltask2.entity.Schedule;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ScheduleRepository extends JpaRepository<Schedule,Long> {
 }

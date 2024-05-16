@@ -2,32 +2,39 @@ package com.sparta.personaltask2.controller;
 
 import com.sparta.personaltask2.dto.RequestScheduleDto;
 import com.sparta.personaltask2.dto.ResponseScheduleDto;
+import com.sparta.personaltask2.service.ScheduleService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/schedules")
+@RequestMapping("/api")
 public class ScheduleController {
 
-    @GetMapping("")
+    private final ScheduleService scheduleService;
+
+    public ScheduleController(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
+    }
+
+    @GetMapping("/schedules")
     public List<ResponseScheduleDto> getSchedule() {
 
-        return null;
+        return scheduleService.getSchedules();
     }
 
-    @PostMapping("")
+    @PostMapping("/schedules")
     public ResponseScheduleDto createSchedule(@RequestBody RequestScheduleDto requestScheduleDto) {
 
-        return null;
+        return scheduleService.createSchedule(requestScheduleDto);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/schedules/{id}")
     public Long deleteSchedule(@PathVariable Long id) {
         return null;
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/schedules/{id}")
     public Long updateSchedule(@PathVariable Long id, @RequestBody RequestScheduleDto requestScheduleDto) {
         return null;
     }
