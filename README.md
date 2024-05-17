@@ -2,5 +2,4 @@
 
 
 
-# API
-https://documenter.getpostman.com/view/18229015/2sA3JT1xYt
+# API :https://documenter.getpostman.com/view/18229015/2sA3JT1xYt
