@@ -1,6 +1,7 @@
 package com.sparta.personaltask2.entity;
 
 import com.sparta.personaltask2.dto.RequestScheduleDto;
+import com.sparta.personaltask2.dto.RequestScheduleUpdateDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,9 +36,9 @@ public class Schedule extends Timestamped {
     }
 
 
-    public void update(RequestScheduleDto requestScheduleDto) {
-        this.title = requestScheduleDto.getTitle();
-        this.content = requestScheduleDto.getContent();
-        this.worker = requestScheduleDto.getWorker();
+    public void update(RequestScheduleUpdateDto requestScheduleUpdateDto) {
+        this.title = requestScheduleUpdateDto.getTitle();
+        this.content = requestScheduleUpdateDto.getContent();
+        this.worker = requestScheduleUpdateDto.getWorker();
     }
 }

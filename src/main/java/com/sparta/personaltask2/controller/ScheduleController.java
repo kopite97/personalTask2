@@ -1,8 +1,6 @@
 package com.sparta.personaltask2.controller;
 
-import com.sparta.personaltask2.dto.RequestScheduleDto;
-import com.sparta.personaltask2.dto.ResponseScheduleDto;
-import com.sparta.personaltask2.entity.Schedule;
+import com.sparta.personaltask2.dto.*;
 import com.sparta.personaltask2.service.ScheduleService;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +29,14 @@ public class ScheduleController {
     }
 
     @DeleteMapping("/schedules")
-    public Long deleteSchedule(@RequestParam Long id, @RequestParam String password) {
+    public ResponseScheduleDeleteDto deleteSchedule(@RequestBody RequestScheduleDeleteDto requestScheduleDeleteDto) {
 
-        return scheduleService.deleteSchedule(id,password);
+        return scheduleService.deleteSchedule(requestScheduleDeleteDto);
     }
 
-    @PutMapping("/schedules/{id}")
-    public Long updateSchedule(@PathVariable Long id, @RequestBody RequestScheduleDto requestScheduleDto) {
-        return scheduleService.updateSchedule(id, requestScheduleDto);
+    @PutMapping("/schedules")
+    public ResponseShceduleUpdateDto updateShcedules(@RequestBody RequestScheduleUpdateDto requestScheduleUpdateDto) {
+        return scheduleService.updateSchedule(requestScheduleUpdateDto);
     }
+
 }
