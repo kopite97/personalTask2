@@ -31,12 +31,14 @@ public class ScheduleService {
     public List<ResponseScheduleDto> getSchedules() {
         return scheduleRepository.findAllByOrderByCreatedAtDesc().stream().map(ResponseScheduleDto::new).toList();
     }
+    public ResponseScheduleDto getScheduleById(Long id) {
+        return new ResponseScheduleDto(findSchedule(id));
+    }
 
     public ResponseScheduleDeleteDto deleteSchedule(RequestScheduleDeleteDto requestScheduleDeleteDto) {
         Schedule schedule = findSchedule(requestScheduleDeleteDto.getId());
         if(!isEqualsPassword(requestScheduleDeleteDto.getPassword(), schedule.getPassword())) {
-            System.out.println("비밀번호가 일치하지 않습니다");
-            return null;
+            throw new BadRequestException("비밀번호가 일치하지 않습니다.");
         }
 
         scheduleRepository.delete(schedule);
@@ -47,8 +49,7 @@ public class ScheduleService {
     public ResponseShceduleUpdateDto updateSchedule(RequestScheduleUpdateDto requestScheduleUpdateDto) {
         Schedule schedule = findSchedule(requestScheduleUpdateDto.getId());
         if(!isEqualsPassword(requestScheduleUpdateDto.getPassword(), schedule.getPassword())) {
-            System.out.println("비밀번호가 일치하지 않습니다");
-            return null;
+            throw new BadRequestException("비밀번호가 일치하지 않습니다.");
         }
 
         schedule.update(requestScheduleUpdateDto);
@@ -56,12 +57,10 @@ public class ScheduleService {
         return new ResponseShceduleUpdateDto(schedule);
     }
     private Schedule findSchedule(Long id) {
-        return scheduleRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("선택한 일정은 존재하지 않습니다."));
+        return scheduleRepository.findById(id).orElseThrow(() -> new BadRequestException("선택한 일정은 존재하지 않습니다."));
     }
 
     private boolean isEqualsPassword(String pw1, String pw2) {
         return pw1.equals(pw2);
     }
-
-
 }
