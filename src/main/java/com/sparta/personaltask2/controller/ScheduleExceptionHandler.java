@@ -17,12 +17,12 @@ public class ScheduleExceptionHandler {
         return new ResponseEntity<>(errorResponse, httpStatusCode);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleException(Exception e) {
-        HttpStatus httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
-        ErrorResponse errorResponse = createResponse(httpStatusCode, e.getMessage());
-        return new ResponseEntity<>(errorResponse, httpStatusCode);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity<ErrorResponse> handleException(Exception e) {
+//        HttpStatus httpStatusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+//        ErrorResponse errorResponse = createResponse(httpStatusCode, e.getMessage());
+//        return new ResponseEntity<>(errorResponse, httpStatusCode);
+//    }
 
 
     private ErrorResponse createResponse(HttpStatus httpStatusCode,String message) {
