@@ -8,7 +8,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "file_Storage")
+@Table(name = "file_storage")
 @NoArgsConstructor
 public class FileEntity {
     @Id
@@ -19,7 +19,6 @@ public class FileEntity {
     @Column(name = "file_type",nullable = false)
     private String fileType;
 
-    @Lob
     @Column(name = "data",nullable = false)
     private byte[] data;
 

@@ -1,13 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <title>File Upload</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Files</title>
 </head>
 <body>
-<h1>File Upload</h1>
-<form method="POST" action="/api/files/upload" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <button type="submit">Upload</button>
-</form>
+<h1>Uploaded Image Files</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>File Name</th>
+        <th>Download</th>
+    </tr>
+    </thead>
+    <tbody id="fileList">
+    <!-- 파일 목록이 여기에 동적으로 추가될 것입니다 -->
+    </tbody>
+</table>
+
+<script>
+    // 업로드된 이미지 파일 목록을 가져오는 함수
+    async function fetchUploadedFiles() {
+        const response = await fetch('/api/files/uploaded');
+        const files = await response.json();
+        return files;
+    }
+
+    // 이미지 파일 목록을 테이블에 표시하는 함수
+    async function displayFiles() {
+        const files = await fetchUploadedFiles();
+        const fileListElement = document.getElementById('fileList');
+
+        files.forEach(file => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                    <td>${file.id}</td>
+                    <td>${file.fileName}</td>
+                    <td><a href="/api/files/download/${file.id}">Download</a></td>
+                `;
+            fileListElement.appendChild(row);
+        });
+    }
+
+    // 페이지 로드 시 파일 목록 표시
+    displayFiles();
+</script>
 </body>
 </html>
