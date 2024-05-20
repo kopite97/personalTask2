@@ -7,6 +7,10 @@
 </head>
 <body>
 <h1>Uploaded Image Files</h1>
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" accept="image/png, image/jpeg, image/jpg" required>
+    <button type="submit">Upload</button>
+</form>
 <table border="1">
     <thead>
     <tr>
@@ -21,6 +25,23 @@
 </table>
 
 <script>
+    // 파일을 업로드하는 함수
+    async function uploadFile(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const response = await fetch('/api/files/upload', {
+            method: 'POST',
+            body: formData
+        });
+        if (response.ok) {
+            // 파일이 성공적으로 업로드되면 파일 목록 갱신
+            displayFiles();
+        } else {
+            alert('Failed to upload file');
+        }
+    }
+
     // 업로드된 이미지 파일 목록을 가져오는 함수
     async function fetchUploadedFiles() {
         const response = await fetch('/api/files/uploaded');
@@ -32,6 +53,7 @@
     async function displayFiles() {
         const files = await fetchUploadedFiles();
         const fileListElement = document.getElementById('fileList');
+        fileListElement.innerHTML = ''; // 파일 목록 초기화
 
         files.forEach(file => {
             const row = document.createElement('tr');
@@ -46,6 +68,10 @@
 
     // 페이지 로드 시 파일 목록 표시
     displayFiles();
+
+    // 폼 이벤트 리스너 등록
+    const uploadForm = document.getElementById('uploadForm');
+    uploadForm.addEventListener('submit', uploadFile);
 </script>
 </body>
 </html>
