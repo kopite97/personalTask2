@@ -10,3 +10,6 @@ ERD
 
 UseDase
 ![usecase](https://github.com/kopite97/personalTask2/assets/144471977/7735fc74-f504-419d-ab82-b698ac010a1d)
+
+
+![swagger](https://github.com/kopite97/personalTask2/assets/144471977/c941b8ca-5f7e-458f-8a16-433669783742)
