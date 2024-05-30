@@ -1,4 +1,4 @@
-package com.sparta.personaltask2.service;
+package com.sparta.personaltask2.error;
 
 public class BadRequestException extends RuntimeException {
     public BadRequestException(String message) {

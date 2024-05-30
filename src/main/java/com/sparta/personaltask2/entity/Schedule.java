@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.action.internal.OrphanRemovalAction;
 
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,13 +30,15 @@ public class Schedule extends Timestamped {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "schedule",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
     public Schedule(RequestScheduleDto requestDto){
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.worker = requestDto.getWorker();
         this.password =requestDto.getPassword();
     }
-
 
     public void update(RequestScheduleUpdateDto requestScheduleUpdateDto) {
         this.title = requestScheduleUpdateDto.getTitle();

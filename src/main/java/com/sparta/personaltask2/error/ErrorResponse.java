@@ -1,4 +1,4 @@
-package com.sparta.personaltask2.entity;
+package com.sparta.personaltask2.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

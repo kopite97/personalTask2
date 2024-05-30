@@ -1,7 +1,5 @@
-package com.sparta.personaltask2.controller;
+package com.sparta.personaltask2.error;
 
-import com.sparta.personaltask2.entity.ErrorResponse;
-import com.sparta.personaltask2.service.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

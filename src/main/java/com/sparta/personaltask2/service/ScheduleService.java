@@ -2,6 +2,7 @@ package com.sparta.personaltask2.service;
 
 import com.sparta.personaltask2.dto.*;
 import com.sparta.personaltask2.entity.Schedule;
+import com.sparta.personaltask2.error.BadRequestException;
 import com.sparta.personaltask2.repository.ScheduleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
