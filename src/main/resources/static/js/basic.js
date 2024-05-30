@@ -1,21 +1,32 @@
 async function getSchedules() {
-    const response = await fetch('/api/schedules');
-    const schedules = await response.json();
-    const schedulesList = document.getElementById('schedulesList');
-    schedulesList.innerHTML = '';
-    schedules.forEach(schedule => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <h3>${schedule.title}</h3>
-            <p>${schedule.content}</p>
-            <p><strong>Worker:</strong> ${schedule.worker}</p>
-            <p><strong>ID:</strong> ${schedule.id}</p>
-            <button onclick="openCommentModal(${schedule.id})">Add Comment</button>
-            <button onclick="openViewCommentsModal(${schedule.id})">View Comments</button>
-        `;
-        schedulesList.appendChild(card);
-    });
+    try {
+        const response = await fetch('/api/schedules');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            throw new TypeError(`Expected JSON, but got ${contentType}`);
+        }
+        const schedules = await response.json();
+        const schedulesList = document.getElementById('schedulesList');
+        schedulesList.innerHTML = '';
+        schedules.forEach(schedule => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${schedule.title}</h3>
+                <p>${schedule.content}</p>
+                <p><strong>Worker:</strong> ${schedule.worker}</p>
+                <p><strong>ID:</strong> ${schedule.id}</p>
+                <button onclick="openCommentModal(${schedule.id})">Add Comment</button>
+                <button onclick="openViewCommentsModal(${schedule.id})">View Comments</button>
+            `;
+            schedulesList.appendChild(card);
+        });
+    } catch (error) {
+        console.error('Failed to fetch schedules:', error);
+    }
 }
 
 async function getScheduleById() {
